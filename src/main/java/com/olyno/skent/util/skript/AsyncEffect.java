@@ -8,6 +8,7 @@ import ch.njol.skript.Skript;
 import ch.njol.skript.lang.Condition;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser;
+import ch.njol.skript.lang.TriggerItem;
 import ch.njol.skript.variables.Variables;
 import ch.njol.util.Kleenean;
 
@@ -52,6 +53,11 @@ public abstract class AsyncEffect extends EffectSection implements Runnable {
             this.runSection(this.event);
         }
         Variables.removeLocals(this.event);
+    }
+
+    @Override
+    protected TriggerItem walk(Event e) {
+        return null;
     }
     
 }

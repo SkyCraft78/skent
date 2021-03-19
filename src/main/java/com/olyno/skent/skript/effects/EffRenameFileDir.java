@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
 
 import com.olyno.skent.skript.events.bukkit.ChangeEvent;
 import com.olyno.skent.skript.events.bukkit.RenameEvent;
@@ -64,6 +65,8 @@ public class EffRenameFileDir extends AsyncEffect {
     protected void executeAsync(Event e) {
         Path[] pathsList = paths.getArray(e);
         String currentName = name.getSingle(e);
+        System.out.println("New Name: " + currentName);
+        System.out.println("Paths lists: " + Arrays.asList(pathsList).toString());
         for (Path path : pathsList) {
             if (Files.exists(path)) {
                 try {
@@ -75,9 +78,7 @@ public class EffRenameFileDir extends AsyncEffect {
                     new RenameEvent(path, currentName);
                     new ChangeEvent(path);
                 } catch (IOException ex) {
-                    if (Files.exists(path)) {
-                        Skript.exception(ex);
-                    }
+                    Skript.exception(ex);
                 }
             }
         }
